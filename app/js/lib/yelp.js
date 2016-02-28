@@ -1,52 +1,27 @@
-/* require the modules needed */
-var oauthSignature = require('oauth-signature');  
-var n = require('nonce')();  
-var request = require('request');  
-var qs = require('querystring');  
-var _ = require('lodash');
+randomString = function(length, chars) {
+    var result = '';
+    for (var i = length; i > 0; --i) result += chars[Math.round(Math.random() * (chars.length - 1))];
+    return result;
+}
 
-var base_url = 'http://api.yelp.com/v2/';
-
-var yelpConsumerKey = 'WBzMfCbIvJwNVkmo1t5U9w';
-var yelpConsumerSecret = 'vRzfZJr48KGSjbzsGiibVBD3Uw4';
-var yelpToken = '-8WaTixDL_UVTuLvoVPYHujO6vrDbxfw';
-var yelpTokenSecret = '4w4z_Uy9axpuzw9ObINTbj1vxdQ';
-
-/* Function for yelp search call
- * ------------------------
+/* Function for generating yelp parameters
  * params: object with params to search
- * callback: callback(error, response, body)
  */
-module.exports.yelpSearch = function (params, callback) {
-  var httpMethod = 'GET';
-  var url = base_url + 'search';
+yelpParams = function (params) {
+  var url = 'http://api.yelp.com/v2/search';
+  var method = 'GET';
+  parameters = params;
+  parameters['oauth_consumer_key'] = 'WBzMfCbIvJwNVkmo1t5U9w';
+  parameters['oauth_token'] = 'A6Lg6U4EhOsYspzFFusS9SaBFmeH8b_H';
+  parameters['oauth_signature_method'] = "HMAC-SHA1";
+  parameters['oauth_nonce'] = randomString(32, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
+  parameters['oauth_timestamp'] = new Date().getTime();
 
-  makeRequestToYelp(httpMethod, url, params, callback);
-};
+  var consumerSecret = 'vRzfZJr48KGSjbzsGiibVBD3Uw4';
+  var tokenSecret = 'nPzk0xbRgKf9ljaVceS2s16jmyk';
+  var signature = oauthSignature.generate(method, url, parameters, consumerSecret, tokenSecret, { encodeSignature: false});
 
-function makeRequestToYelp(method, apiUrl, params, callback) {
-  var required_params = {
-    oauth_consumer_key : yelpConsumerKey,
-    oauth_token : yelpToken,
-    oauth_nonce : n(),
-    oauth_timestamp : n().toString().substr(0,10),
-    oauth_signature_method : 'HMAC-SHA1',
-    oauth_version : '1.0'
-  };
-  var parameters = _.assign(params, required_params);
-  var consumerSecret = yelpConsumerSecret;
-  var tokenSecret = yelpTokenSecret;
-  var signature = oauthSignature.generate(method, apiUrl, parameters, consumerSecret, tokenSecret, { encodeSignature: false});
+  parameters['oauth_signature'] = signature;
 
-  /* We add the signature to the list of paramters */
-  parameters.oauth_signature = signature;
-
-  /* Then we turn the paramters object, to a query string */
-  var paramURL = qs.stringify(parameters);
-  var apiURL = apiUrl + '?' + paramURL;
-
-  /* Then we use request to send make the API Request */
-  request(apiURL, function(error, response, body){
-    return callback(error, response, body);
-  });
+  return parameters;
 }
