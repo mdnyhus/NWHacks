@@ -6,9 +6,15 @@
 angular.module('EventApp')
     .controller('MainCtrl', function ($scope, $http, eventfulKey) {
         $scope.chosenDate = new Date();
-        $scope.categories = "";
         $scope.location = "";
         $scope.city = "";
+        
+        $scope.chosenStartTime = moment();
+        $scope.twoHoursFromNow = moment().add(2, 'hour');
+        $scope.locationCity = 'Vancouver';
+        $scope.allCategories = [];
+        $scope.selectedCategories = [];
+        $scope.categories = "";
         
         window.onload = function() {
           var input = document.getElementById('pac-input');
@@ -29,7 +35,7 @@ angular.module('EventApp')
           });
         }
         
-        $scope.getDate = function() {
+        function getDateEventfulFormat() {
           var year = $scope.chosenDate.getFullYear().toString();
           var month = $scope.chosenDate.getMonth();
           if (month < 10) {
@@ -48,12 +54,6 @@ angular.module('EventApp')
           return year + month + date + "00";
         }
         
-        $scope.chosenStartTime = moment();
-        $scope.twoHoursFromNow = moment().add(2, 'hour');
-        $scope.locationCity = 'Vancouver';
-        $scope.allCategories = [];
-        $scope.selectedCategories = [];
-
         $scope.add = function(category) {
             $scope.allCategories.splice($scope.allCategories.indexOf(category), 1);
             $scope.selectedCategories.push(category);
@@ -67,9 +67,9 @@ angular.module('EventApp')
             url: 'http://api.eventful.com/json/events/search',
             params: {
                 app_key: eventfulKey,
-                q: $scope.categories,
+                category: $scope.categories,
                 where: $scope.city,
-                date: $scope.getDate() + '-' + $scope.getDate()
+                date: getDateEventfulFormat() + '-' + getDateEventfulFormat()
             }
         }).then(function(res) {
             $scope.data = res;
@@ -90,11 +90,15 @@ angular.module('EventApp')
             url: 'http://api.eventful.com/json/categories/list',
             params: {
                 app_key: eventfulKey,
-                where: $scope.locationCity,
-                date: $scope.chosenDate,
+                where: $scope.city,
+                date: getDateEventfulFormat() + '-' + getDateEventfulFormat(),
                 sort_order: 'popularity'
             }
         }).then(function(res) {
             $scope.allCategories = res.data.category;
+            for (var i=0; i < $scope.allCategories.length; i++) {
+              var name = $scope.allCategories[i].name;
+              $scope.allCategories[i].name = name.replace(" &amp; ", "/");
+            }
         });
     });
