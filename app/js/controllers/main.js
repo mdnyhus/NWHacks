@@ -6,6 +6,8 @@
 angular.module('EventApp')
     .controller('MainCtrl', function ($scope, $http, eventfulKey) {
         $scope.chosenDate = new Date();
+        $scope.chosenStartTime = moment();
+        $scope.twoHoursFromNow = moment().add(2, 'hour');
 
         $http({
             method: 'GET',
