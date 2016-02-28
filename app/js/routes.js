@@ -8,8 +8,7 @@ angular.module('EventApp')
         $stateProvider
             .state('land', {
                 url: '/',
-                templateUrl: 'views/main.html',
-                controller: 'MainCtrl'
+                templateUrl: 'views/main.html'
             });
 
         $urlRouterProvider.otherwise('/');

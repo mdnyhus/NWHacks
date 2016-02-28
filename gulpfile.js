@@ -5,11 +5,9 @@ var concat = require('gulp-concat');
 
 gulp.task('connect', function() {
     connect.server({
-        port: 8080,
-        root: './dist',
-        livereload: {
-            port: 35728
-        }
+        port: 9000,
+        root: 'dist',
+        livereload: true
     });
 });
 
