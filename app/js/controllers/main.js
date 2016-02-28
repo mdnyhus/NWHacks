@@ -7,7 +7,7 @@ angular.module('EventApp')
     .controller('MainCtrl', function ($scope, $http, eventfulKey) {
         $scope.chosenDate = new Date();
         $scope.location = "";
-        $scope.city = "";
+        $scope.city = "Vancouver";
         
         $scope.chosenStartTime = moment();
         $scope.twoHoursFromNow = moment().add(2, 'hour');
@@ -33,7 +33,7 @@ angular.module('EventApp')
               $scope.city = city;
             }
           });
-        }
+        };
         
         function getDateEventfulFormat() {
           var year = $scope.chosenDate.getFullYear().toString();
@@ -52,37 +52,64 @@ angular.module('EventApp')
           }         
           
           return year + month + date + "00";
-        }
+        };
         
         $scope.add = function(category) {
             $scope.allCategories.splice($scope.allCategories.indexOf(category), 1);
             $scope.selectedCategories.push(category);
         };
 
+        $scope.removeChip = function(chip) {
+            console.log(chip);
+            $scope.allCategories.push(chip);
+        };
+
         $scope.openMenu = function($mdOpenMenu, ev) {
             $mdOpenMenu(ev);
         };
-        $http({
-            method: 'GET',
-            url: 'http://api.eventful.com/json/events/search',
-            params: {
-                app_key: eventfulKey,
-                category: $scope.categories,
-                where: $scope.city,
-                date: getDateEventfulFormat() + '-' + getDateEventfulFormat()
-            }
-        }).then(function(res) {
-            $scope.data = res;
-        });
 
-        var parameters = yelpParams({location: 'San+Francisc', term: 'food'});
+        $scope.search = function() {
+            $scope.categories = "";
+            for (var i = 0; i < $scope.selectedCategories.length; i++) {
+                $scope.categories += $scope.selectedCategories[i].id;
+                if (i !== $scope.selectedCategories.length - 1) {
+                    $scope.categories += ',';
+                }
+            }
+            $http({
+                method: 'GET',
+                url: 'http://api.eventful.com/json/events/search',
+                params: {
+                    app_key: eventfulKey,
+                    category: $scope.categories,
+                    where: $scope.city,
+                    date: $scope.getDate() + '-' + $scope.getDate()
+                }
+            }).then(function (res) {
+                console.dir(res);
+            });
+        };
+
+        $scope.yelpCity = 'Vancouver';
+        $scope.yelpTerm = 'food';
+        $scope.yelpLimit = 10;
+
+        var yelpSearchParams = {
+            location: $scope.yelpCity,
+            term: $scope.yelpTerm,
+            limit: $scope.yelpLimit,
+            sort: 2
+        };
+
+        var yelpParams = yelpGenParams(yelpSearchParams);
 
         $http({
             method: 'GET',
             url: 'http://api.yelp.com/v2/search',
             params: parameters
         }).then(function(res) {
-            $scope.yelpRet = res;
+            console.log(res.data.businesses);
+            $scope.suggestions = res.data.businesses;
         });
         
         $http({
