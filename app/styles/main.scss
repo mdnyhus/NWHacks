@@ -1,4 +1,16 @@
+$margin: 50px;
+$margin-small: 10px;
+
 .main {
+  #location-autocomplete {
+  float: right;
+  margin: $margin-small $margin;
+    
+    #pac-input {
+      width: 200px; // Magic number!!!
+    }
+  }
+    
   .more-button {
     width: 100px;
   }
