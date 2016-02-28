@@ -4,7 +4,7 @@
  * # MainCtrl
  */
 angular.module('EventApp')
-    .controller('MainCtrl', function ($scope, $http, eventfulKey) {
+    .controller('MainCtrl', function ($scope, $http, eventfulKey, yelpConsKey, yelpConsSec, yelpToken, yelpTokenSec) {
         //$http.get('http://api.eventful.com/rest/events/search?app_key=' + eventfulKey +
         //    '&q=music&where=San%20Diego' + '' +
         //    '&date=2015061000-2016062000&include=tags%2Ccategories&page_size=5&sort_order=popularity')
@@ -24,4 +24,3 @@ angular.module('EventApp')
         }).then(function(res) {
             $scope.data = res;
         });
-    });
