@@ -1,3 +1,9 @@
+$margin: 50px;
+$margin-small: 10px;
+
 .main {
-    
+  #pac-input {
+    float: right;
+    margin: $margin-small $margin;
+  }
 }

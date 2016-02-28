@@ -20,3 +20,8 @@ angular.module('EventApp')
             $scope.data = res;
         });
     });
+    
+window.onload = function() {
+  var input = document.getElementById('pac-input');
+  var autocomplete = new google.maps.places.Autocomplete(input);
+}
