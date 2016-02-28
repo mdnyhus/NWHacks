@@ -23,6 +23,7 @@ gulp.task('watch', function() {
     gulp.watch('app/styles/**/*.scss', ['sass']);
     gulp.watch('app/js/**/*.js', ['dev-copy']);
     gulp.watch('app/**/*.html', ['dev-copy']);
+    gulp.watch('app/**/*.css', ['dev-copy']);
 });
 
 gulp.task('copy', function() {
@@ -36,6 +37,9 @@ gulp.task('dev-copy', function() {
         .pipe(connect.reload());
     gulp.src('app/**/*.html')
         .pipe(gulp.dest('dist/'))
+        .pipe(connect.reload());
+    gulp.src('app/**/*.css')
+        .pipe(gulp.dest('dist/css'))
         .pipe(connect.reload());
 });
 
