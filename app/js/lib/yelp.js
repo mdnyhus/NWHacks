@@ -7,7 +7,7 @@ randomString = function(length, chars) {
 /* Function for generating yelp parameters
  * params: object with params to search
  */
-yelpParams = function (params) {
+yelpGenParams = function (params) {
   var url = 'http://api.yelp.com/v2/search';
   var method = 'GET';
   parameters = params;

@@ -81,13 +81,20 @@ angular.module('EventApp')
             $scope.data = res;
         });
 
-        var parameters = yelpParams({location: 'San+Francisc', term: 'food'});
+        var yelpSearchParams = {
+            location: $scope.locationCity,
+            term: 'food',
+            limit: 10,
+            sort: 2, 
+        }
+        var yelpParams = yelpGenParams(yelpSearchParams);
 
         $http({
             method: 'GET',
             url: 'http://api.yelp.com/v2/search',
             params: parameters
         }).then(function(res) {
+            console.log(res.data);
             $scope.yelpRet = res;
         });
         
