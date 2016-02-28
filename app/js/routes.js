@@ -6,7 +6,7 @@
 angular.module('EventApp')
     .config(function($stateProvider, $urlRouterProvider) {
         $stateProvider
-            .state('main', {
+            .state('land', {
                 url: '/',
                 templateUrl: 'views/main.html',
                 controller: 'MainCtrl'
