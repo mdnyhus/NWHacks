@@ -23,14 +23,17 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
 
     <!-- Angular Material CSS now available via Google CDN; version 0.11.2 used here -->
-    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/0.11.2/angular-material.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/angular-material/1.0.0-rc3/angular-material.min.css" rel="stylesheet" type="text/css"/>
+
+    <!-- Date / Time picker styles -->
+    <link rel="stylesheet" href="css/styles/material-datetimepicker.min.css" type="text/css"/>
 
     <!-- Main css file -->
     <link rel="stylesheet" href="css/main.css">
+
 </head>
 <body>
 <div>
-    <h1>Test2</h1>
     <div ui-view></div>
 </div>
 
@@ -52,6 +55,12 @@
 
 <!-- Eventful API -->
 <script type="text/javascript" src="http://api.eventful.com/js/api"></script>
+
+<!-- Date / Time picker dependencies -->
+<script src="js/lib/moment-with-locales.min.js"></script>
+
+<!-- Date / Time picker -->
+<script src="js/lib/angular-material-datetimepicker.min.js"></script>
 
 <!-- app javascript -->
 <script src="js/app.js"></script>

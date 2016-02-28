@@ -1,3 +1,34 @@
 <div class="main" ng-controller="MainCtrl">
-   <p>{{data}}</p>
+   <div ng-cloak>
+      <md-content>
+         <md-tabs md-dynamic-height md-border-bottom>
+            <md-tab label="Logistics">
+               <md-content class="md-padding" layout="column">
+                  <h1 class="md-display-2">Plan your event below</h1>
+                  <md-datepicker ng-model="chosenDate" md-placeholder="Enter date"></md-datepicker>
+                  <md-input-container class="md-block">
+                     <label>Free time starts</label>
+                     <input mdc-datetime-picker="" date="false" time="true" type="text" id="time" short-time="true"
+                            placeholder="Time" format="hh:mm a" ng-model="chosenStartTime" class=" md-input">
+                  </md-input-container>
+                  <md-input-container class="md-block">
+                     <label>Get me home by</label>
+                     <input mdc-datetime-picker="" date="false" time="true" type="text" id="time" short-time="true"
+                            placeholder="Time" format="hh:mm a" ng-model="twoHoursFromNow" class=" md-input">
+                  </md-input-container>
+               </md-content>
+            </md-tab>
+            <md-tab label="Main Event">
+               <md-content class="md-padding">
+                  <h1 class="md-display-2">Select your main event for {{chosenDate | date}}</h1>
+               </md-content>
+            </md-tab>
+            <md-tab label="Suggestions">
+               <md-content class="md-padding">
+                  <h1 class="md-display-2">Suggestions to complement {{chosenEvent}}</h1>
+               </md-content>
+            </md-tab>
+         </md-tabs>
+      </md-content>
+   </div>
 </div>
