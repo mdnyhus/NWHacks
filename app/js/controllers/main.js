@@ -10,6 +10,7 @@ angular.module('EventApp')
         $scope.twoHoursFromNow = moment().add(2, 'hour');
         $scope.locationCity = 'Vancouver';
         $scope.allCategories = [];
+        $scope.selectedCategories = [];
 
         $scope.add = function(category) {
             $scope.allCategories.splice($scope.allCategories.indexOf(category), 1);
