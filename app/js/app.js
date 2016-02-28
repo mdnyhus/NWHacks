@@ -9,8 +9,8 @@ angular.module('EventApp', [
     'ngMaterial'
 ])
 .constant('firebaseUrl', 'https://nwhacks2016.firebaseio.com/')
-.constant('eventfulApiKey', 'wKZhJ3S2hDDLHtD5')
-.constant('yelpApiKey', 'SoLwK5jLDVspCB1x1wkKnA')
+.constant('eventfulKey', 'wKZhJ3S2hDDLHtD5')
+.constant('yelpKey', 'SoLwK5jLDVspCB1x1wkKnA')
 .factory('rootRef', function(firebaseUrl) {
     return new Firebase(firebaseUrl);
 });
