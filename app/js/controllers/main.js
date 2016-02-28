@@ -4,6 +4,6 @@
  * # MainCtrl
  */
 angular.module('EventApp')
-    .controller('MainCtrl', function ($scope) {
+    .controller('MainCtrl', function ($scope, $http) {
         
     });
