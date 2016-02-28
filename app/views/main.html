@@ -42,7 +42,7 @@
                   </md-input-container>
                </md-content>
                <md-content>
-                  <md-chips ng-model="selectedCategories" readonly="false">
+                  <md-chips ng-model="selectedCategories" md-on-remove="removeChip($chip)" readonly="false">
                      <md-chip-template>
                         <strong>{{$chip.id}}</strong>
                      </md-chip-template>

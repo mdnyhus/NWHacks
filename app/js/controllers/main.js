@@ -27,7 +27,7 @@ angular.module('EventApp')
               $scope.city = city;
             }
           });
-        }
+        };
         
         $scope.getDate = function() {
           var year = $scope.chosenDate.getFullYear().toString();
@@ -46,7 +46,7 @@ angular.module('EventApp')
           }         
           
           return year + month + date + "00";
-        }
+        };
         
         $scope.chosenStartTime = moment();
         $scope.twoHoursFromNow = moment().add(2, 'hour');
@@ -59,9 +59,15 @@ angular.module('EventApp')
             $scope.selectedCategories.push(category);
         };
 
+        $scope.removeChip = function(chip) {
+            console.log(chip);
+            $scope.allCategories.push(chip);
+        };
+
         $scope.openMenu = function($mdOpenMenu, ev) {
             $mdOpenMenu(ev);
         };
+
         $http({
             method: 'GET',
             url: 'http://api.eventful.com/json/events/search',
