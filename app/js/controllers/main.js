@@ -14,7 +14,7 @@ angular.module('EventApp')
 
         $http({
             method: 'GET',
-            url: 'http://api.eventful.com/rest/events/search',
+            url: 'http://api.eventful.com/json/events/search',
             params: {
                 app_key: eventfulKey,
                 q: 'music',
