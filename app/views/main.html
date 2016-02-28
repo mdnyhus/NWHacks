@@ -17,6 +17,38 @@
                             placeholder="Time" format="hh:mm a" ng-model="twoHoursFromNow" class=" md-input">
                   </md-input-container>
                </md-content>
+               <md-content class="md-padding" layout="row">
+                  <md-button ng-repeat="category in mainCategories" ng-click="add(category)">{{category.id}}</md-button>
+                  <md-input-container>
+                     <!--<label>More</label>-->
+                     <!--<md-select ng-model="clickedMore">-->
+                        <!--<md-option ng-repeat="category in dropDownCategories" ng-click="add(category)" value="{{category}}">-->
+                           <!--{{category.id}}-->
+                        <!--</md-option>-->
+                     <!--</md-select>-->
+                     <md-menu md-position-mode="target-right target" >
+                        <md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdOpenMenu($event)">
+                           <p><i class="fa fa-chevron-down"></i>More</p>
+                        </md-button>
+                        <md-menu-content width="6" >
+                           <md-menu-item ng-repeat="category in dropDownCategories">
+                              <md-button ng-click="add(category)">
+                                 <div layout="row">
+                                    <p flex>{{category.id}}</p>
+                                 </div>
+                              </md-button>
+                           </md-menu-item>
+                        </md-menu-content>
+                     </md-menu>
+                  </md-input-container>
+               </md-content>
+               <md-content>
+                  <md-chips ng-model="selectedCategories" readonly="false">
+                     <md-chip-template>
+                        <strong>{{$chip.id}}</strong>
+                     </md-chip-template>
+                  </md-chips>
+               </md-content>
             </md-tab>
             <md-tab label="Main Event">
                <md-content class="md-padding">
