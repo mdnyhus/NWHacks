@@ -2,6 +2,7 @@ $margin: 50px;
 $margin-small: 10px;
 
 .main {
+<<<<<<< HEAD
   #location-autocomplete {
   float: right;
   margin: $margin-small $margin;
@@ -9,5 +10,9 @@ $margin-small: 10px;
     #pac-input {
       width: 200px; // Magic number!!!
     }
+=======
+  .more-button {
+    width: 100px;
+>>>>>>> 0438303b03beb8a1c2628f51c6def918c44b2dbb
   }
 }

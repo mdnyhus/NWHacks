@@ -6,6 +6,7 @@
 angular.module('EventApp')
     .controller('MainCtrl', function ($scope, $http, eventfulKey) {
         $scope.chosenDate = new Date();
+<<<<<<< HEAD
         $scope.categories = "";
         $scope.location = "";
         $scope.city = "";
@@ -48,6 +49,22 @@ angular.module('EventApp')
           return year + month + date + "00";
         }
         
+=======
+        $scope.chosenStartTime = moment();
+        $scope.twoHoursFromNow = moment().add(2, 'hour');
+        $scope.locationCity = 'Vancouver';
+        $scope.allCategories = [];
+
+        $scope.add = function(category) {
+            $scope.allCategories.splice($scope.allCategories.indexOf(category), 1);
+            $scope.selectedCategories.push(category);
+        };
+
+        $scope.openMenu = function($mdOpenMenu, ev) {
+            $mdOpenMenu(ev);
+        };
+
+>>>>>>> 0438303b03beb8a1c2628f51c6def918c44b2dbb
         $http({
             method: 'GET',
             url: 'http://api.eventful.com/json/events/search',
@@ -60,6 +77,7 @@ angular.module('EventApp')
         }).then(function(res) {
             $scope.data = res;
         });
+<<<<<<< HEAD
     });
     
 // window.onload = function() {
@@ -69,3 +87,29 @@ angular.module('EventApp')
           // return;
   // });
 // }
+=======
+
+        var parameters = yelpParams({location: 'San+Francisc', term: 'food'});
+
+        $http({
+            method: 'GET',
+            url: 'http://api.yelp.com/v2/search',
+            params: parameters
+        }).then(function(res) {
+            $scope.yelpRet = res;
+        });
+        
+        $http({
+            method: 'GET',
+            url: 'http://api.eventful.com/json/categories/list',
+            params: {
+                app_key: eventfulKey,
+                where: $scope.locationCity,
+                date: $scope.chosenDate,
+                sort_order: 'popularity'
+            }
+        }).then(function(res) {
+            $scope.allCategories = res.data.category;
+        });
+    });
+>>>>>>> 0438303b03beb8a1c2628f51c6def918c44b2dbb

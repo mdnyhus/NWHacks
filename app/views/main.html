@@ -3,9 +3,10 @@
       <md-content>
          <md-tabs md-dynamic-height md-border-bottom>
             <md-tab label="Logistics">
-               <md-content class="md-padding">
+               <md-content class="md-padding" layout="column">
                   <h1 class="md-display-2">Plan your event below</h1>
                   <md-datepicker ng-model="chosenDate" md-placeholder="Enter date"></md-datepicker>
+<<<<<<< HEAD
                   <div id="location-autocomplete">
                     Location:
                     <input id="pac-input" ng-model="location" class="controls" type="text"
@@ -15,6 +16,50 @@
                   <div>{{getDate}}</div>
                   <!--<input mdc-datetime-picker="" date="false" time="true" type="text" id="time" short-time="true"-->
                          <!--placeholder="Time" min-date="minDate" format="hh:mm a" ng-model="time" class=" md-input">-->
+=======
+                  <md-input-container class="md-block">
+                     <label>Free time starts</label>
+                     <input mdc-datetime-picker="" date="false" time="true" type="text" id="time" short-time="true"
+                            placeholder="Time" format="hh:mm a" ng-model="chosenStartTime" class=" md-input">
+                  </md-input-container>
+                  <md-input-container class="md-block">
+                     <label>Get me home by</label>
+                     <input mdc-datetime-picker="" date="false" time="true" type="text" id="time" short-time="true"
+                            placeholder="Time" format="hh:mm a" ng-model="twoHoursFromNow" class=" md-input">
+                  </md-input-container>
+               </md-content>
+               <md-content class="md-padding" layout="row">
+                  <md-button ng-repeat="category in allCategories | limitTo:10" ng-click="add(category)">{{category.id}}</md-button>
+                  <md-input-container>
+                     <!--<label>More</label>-->
+                     <!--<md-select ng-model="clickedMore">-->
+                        <!--<md-option ng-repeat="category in dropDownCategories" ng-click="add(category)" value="{{category}}">-->
+                           <!--{{category.id}}-->
+                        <!--</md-option>-->
+                     <!--</md-select>-->
+                     <md-menu md-position-mode="target-right target" >
+                        <md-button aria-label="Open demo menu" class="md-icon-button more-button" ng-click="$mdOpenMenu($event)">
+                           <p><i class="fa fa-chevron-down"></i>More</p>
+                        </md-button>
+                        <md-menu-content width="6" >
+                           <md-menu-item ng-repeat="category in allCategories" ng-if="$index > 10">
+                              <md-button ng-click="add(category)">
+                                 <div layout="row">
+                                    <p flex>{{category.id}}</p>
+                                 </div>
+                              </md-button>
+                           </md-menu-item>
+                        </md-menu-content>
+                     </md-menu>
+                  </md-input-container>
+               </md-content>
+               <md-content>
+                  <md-chips ng-model="selectedCategories" readonly="false">
+                     <md-chip-template>
+                        <strong>{{$chip.id}}</strong>
+                     </md-chip-template>
+                  </md-chips>
+>>>>>>> 0438303b03beb8a1c2628f51c6def918c44b2dbb
                </md-content>
             </md-tab>
             <md-tab label="Main Event">
