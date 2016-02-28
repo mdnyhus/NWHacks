@@ -58,6 +58,20 @@
                <md-content class="md-padding">
                   <h1 class="md-display-2">Suggestions to complement {{chosenEvent}}</h1>
                </md-content>
+               <md-content>
+                  <md-list>
+                     <md-subheader class="md-no-sticky">{{ yelpLimit }} best {{ yelpTerm }} in {{ yelpCity }} </md-subheader>
+                     <md-list-item class="md-3-line" ng-repeat="item in suggestions">
+                       <img ng-src="{{item.image_url}}" class="md-avatar" alt="{{item.rating_img_url}}" />
+                       <div class="md-list-item-text" layout="column">
+                         <h3>{{ item.name }}</h3>
+                         <p>Rating: {{ item.rating }}</p>
+                         <p>Phone Number: {{ item.phone }}</p>
+                       </div>
+                     </md-list-item>
+                     <md-divider ></md-divider>
+                  </md-list>
+               </md-content>
             </md-tab>
          </md-tabs>
       </md-content>
