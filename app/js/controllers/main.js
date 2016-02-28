@@ -75,12 +75,17 @@ angular.module('EventApp')
             $scope.data = res;
         });
 
+        $scope.yelpCity = 'Vancouver';
+        $scope.yelpTerm = 'food';
+        $scope.yelpLimit = 10;
+
         var yelpSearchParams = {
-            location: $scope.locationCity,
-            term: 'food',
-            limit: 10,
+            location: $scope.yelpCity,
+            term: $scope.yelpTerm,
+            limit: $scope.yelpLimit,
             sort: 2, 
         }
+
         var yelpParams = yelpGenParams(yelpSearchParams);
 
         $http({
@@ -88,8 +93,8 @@ angular.module('EventApp')
             url: 'http://api.yelp.com/v2/search',
             params: parameters
         }).then(function(res) {
-            console.log(res.data);
-            $scope.yelpRet = res;
+            console.log(res.data.businesses);
+            $scope.suggestions = res.data.businesses;
         });
         
         $http({
