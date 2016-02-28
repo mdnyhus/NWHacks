@@ -9,16 +9,14 @@ angular.module('EventApp')
         $scope.chosenStartTime = moment();
         $scope.twoHoursFromNow = moment().add(2, 'hour');
         $scope.locationCity = 'Vancouver';
-        $scope.mainCategories = [];
-        $scope.dropDownCategories = [];
-        $scope.selectedCategories = [];
+        $scope.allCategories = [];
 
         $scope.add = function(category) {
+            $scope.allCategories.splice($scope.allCategories.indexOf(category), 1);
             $scope.selectedCategories.push(category);
         };
 
         $scope.openMenu = function($mdOpenMenu, ev) {
-            originatorEv = ev;
             $mdOpenMenu(ev);
         };
 
@@ -45,11 +43,6 @@ angular.module('EventApp')
                 sort_order: 'popularity'
             }
         }).then(function(res) {
-            for (var i = 0; i < 10; i++) {
-                $scope.mainCategories.push(res.data.category[i]);
-            }
-            for (i = 10; i < res.data.category.length; i++) {
-                $scope.dropDownCategories.push(res.data.category[i]);
-            }
+            $scope.allCategories = res.data.category;
         });
     });
