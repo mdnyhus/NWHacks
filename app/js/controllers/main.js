@@ -8,7 +8,7 @@ angular.module('EventApp')
         $scope.chosenDate = new Date();
         $scope.categories = "";
         $scope.location = "";
-        $scope.city = "";
+        $scope.city = "Vancouver";
         
         window.onload = function() {
           var input = document.getElementById('pac-input');
@@ -50,7 +50,6 @@ angular.module('EventApp')
         
         $scope.chosenStartTime = moment();
         $scope.twoHoursFromNow = moment().add(2, 'hour');
-        $scope.locationCity = 'Vancouver';
         $scope.allCategories = [];
         $scope.selectedCategories = [];
 
@@ -68,18 +67,27 @@ angular.module('EventApp')
             $mdOpenMenu(ev);
         };
 
-        $http({
-            method: 'GET',
-            url: 'http://api.eventful.com/json/events/search',
-            params: {
-                app_key: eventfulKey,
-                q: $scope.categories,
-                where: $scope.city,
-                date: $scope.getDate() + '-' + $scope.getDate()
+        $scope.search = function() {
+            $scope.categories = "";
+            for (var i = 0; i < $scope.selectedCategories.length; i++) {
+                $scope.categories += $scope.selectedCategories[i].id;
+                if (i !== $scope.selectedCategories.length - 1) {
+                    $scope.categories += ',';
+                }
             }
-        }).then(function(res) {
-            $scope.data = res;
-        });
+            $http({
+                method: 'GET',
+                url: 'http://api.eventful.com/json/events/search',
+                params: {
+                    app_key: eventfulKey,
+                    category: $scope.categories,
+                    where: $scope.city,
+                    date: $scope.getDate() + '-' + $scope.getDate()
+                }
+            }).then(function (res) {
+                console.dir(res);
+            });
+        };
 
         var yelpSearchParams = {
             location: $scope.locationCity,
