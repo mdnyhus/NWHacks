@@ -33,6 +33,16 @@ angular.module('EventApp')
             $scope.data = res;
         });
 
+        var parameters = yelpParams({location: 'San+Francisc', term: 'food'});
+
+        $http({
+            method: 'GET',
+            url: 'http://api.yelp.com/v2/search',
+            params: parameters
+        }).then(function(res) {
+            $scope.yelpRet = res;
+        });
+        
         $http({
             method: 'GET',
             url: 'http://api.eventful.com/json/categories/list',
