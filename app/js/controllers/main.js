@@ -6,7 +6,6 @@
 angular.module('EventApp')
     .controller('MainCtrl', function ($scope, $http, eventfulKey) {
         $scope.chosenDate = new Date();
-<<<<<<< HEAD
         $scope.categories = "";
         $scope.location = "";
         $scope.city = "";
@@ -49,7 +48,6 @@ angular.module('EventApp')
           return year + month + date + "00";
         }
         
-=======
         $scope.chosenStartTime = moment();
         $scope.twoHoursFromNow = moment().add(2, 'hour');
         $scope.locationCity = 'Vancouver';
@@ -63,8 +61,6 @@ angular.module('EventApp')
         $scope.openMenu = function($mdOpenMenu, ev) {
             $mdOpenMenu(ev);
         };
-
->>>>>>> 0438303b03beb8a1c2628f51c6def918c44b2dbb
         $http({
             method: 'GET',
             url: 'http://api.eventful.com/json/events/search',
@@ -77,17 +73,6 @@ angular.module('EventApp')
         }).then(function(res) {
             $scope.data = res;
         });
-<<<<<<< HEAD
-    });
-    
-// window.onload = function() {
-  
-  // autocomplete.addListener('place_changed', function() {
-    // window.alert($scope.location);
-          // return;
-  // });
-// }
-=======
 
         var parameters = yelpParams({location: 'San+Francisc', term: 'food'});
 
@@ -112,4 +97,3 @@ angular.module('EventApp')
             $scope.allCategories = res.data.category;
         });
     });
->>>>>>> 0438303b03beb8a1c2628f51c6def918c44b2dbb
