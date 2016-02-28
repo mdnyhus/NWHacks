@@ -97,8 +97,8 @@ angular.module('EventApp')
             location: $scope.yelpCity,
             term: $scope.yelpTerm,
             limit: $scope.yelpLimit,
-            sort: 2, 
-        }
+            sort: 2
+        };
 
         var yelpParams = yelpGenParams(yelpSearchParams);
 
